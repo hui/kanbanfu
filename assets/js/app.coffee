@@ -20,7 +20,7 @@ logout = () ->
   Trello.deauthorize()
   updateLoggedIn()
 
-Trello.authorize interactive:false, success: onAuthorize
+Trello.authorize interactive:false, success: onAuthorize, name: "KanbanFu.com"
 
 $("#connectLink").bind 'click', () ->
   Trello.authorize(type: "popup", success: onAuthorize, name: "KanbanFu.com", scope: { write: true, read: true })
