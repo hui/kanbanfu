@@ -1,0 +1,22 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+#output {
+    padding: 4px;
+}
+
+.card {
+    display: block;
+    padding: 2px;
+    cursor: pointer;
+}
+
+#loggedin {
+  display: none;
+}

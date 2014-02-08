@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.0/css/bootstrap.min.css')
+    != css("style")
+  body
+    .container
+      div.navbar.navbar-default(role='navigation')
+        div.container-fluid
+          div.navbar-header
+            button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='/') KanbanFu.com
+          div.navbar-collapse.collapse
+            ul.nav.navbar-nav.navbar-right
+              li#loggedout
+                a#connectLink(href="#")= "Connect To Trello"
+              li#loggedin.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  span#fullName
+                    | Welcome
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a#disconnect(href="#")= "Log Out"
+
+    .container
+      block content
+
+    script(src='http://cdn.staticfile.org/jquery/2.1.0/jquery.min.js')
+    script(src='http://cdn.staticfile.org/twitter-bootstrap/3.1.0/js/bootstrap.min.js')
+    script(src='https://api.trello.com/1/client.js?key=e60aca6e0ce93e626823f4710758f538&name=KanbanFu.com')
+    != js("app")
