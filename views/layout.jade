@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='http://cdn.staticfile.org/twitter-bootstrap/3.1.0/css/bootstrap.min.css')
+    != css("bootstrap")
     != css("style")
   body
     .container
@@ -31,7 +31,5 @@ html
     .container
       block content
 
-    script(src='http://cdn.staticfile.org/jquery/2.1.0/jquery.min.js')
-    script(src='http://cdn.staticfile.org/twitter-bootstrap/3.1.0/js/bootstrap.min.js')
-    script(src='https://api.trello.com/1/client.js?key=e60aca6e0ce93e626823f4710758f538&name=KanbanFu.com')
     != js("app")
+    script(src='https://api.trello.com/1/client.js?key=e60aca6e0ce93e626823f4710758f538&name=KanbanFu.com')
