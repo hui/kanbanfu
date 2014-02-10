@@ -9,7 +9,27 @@
 
 window.KanbanFu = Ember.Application.create()
 KanbanFu.Router.map ()->
-  @resource('boards', path: '/boards')
+  @resource 'boards', path: '/boards'
+  @resource 'board', path: '/board/:board_id'
 
-$ ->
-  # Trello.get "members/me/boards", filter: 'open', (boards) ->
+KanbanFu.LoadingRoute = Ember.Route.extend
+  activate: ->
+    @_super()
+    Pace.restart()
+
+  deactivate: ->
+    @_super()
+    Pace.stop()
+
+KanbanFu.AuthorizedRoute = Ember.Route.extend
+  beforeModel: ()->
+    unless Trello.authorized()
+      new Ember.RSVP.Promise (resolve)=>
+        Trello.authorize interactive: false, name: "KanbanFu.com", success: () =>
+          new Ember.RSVP.Promise (resolve)=>
+            @controllerFor("currentMember").login()
+            resolve(true)
+          resolve(Trello.authorized())
+        , error: () =>
+          @transitionTo "/"
+          resolve(false)

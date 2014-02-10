@@ -4,12 +4,9 @@ KanbanFu.ApplicationController = Ember.Controller.extend
 
   actions:
     login: ->
-      currentMember = @get "currentMember"
-      Trello.authorize(type: "popup", success: =>
-        currentMember.login()
-      , name: "KanbanFu.com", scope: { write: true, read: true })
+      Trello.authorize type: "popup", name: "KanbanFu.com", scope: { write: true, read: true }, expiration: 'never', success: =>
+        @get("currentMember").login()
 
     logout: ->
       Trello.deauthorize()
-      currentMember = @get "currentMember"
-      currentMember.logout()
+      @get("currentMember").logout()

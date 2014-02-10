@@ -10,3 +10,4 @@ KanbanFu.CurrentMemberController = Ember.ObjectController.extend
   logout: ->
     @set 'authorized', false
     @set 'content', null
+    @transitionToRoute "/"
