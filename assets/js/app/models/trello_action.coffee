@@ -19,7 +19,6 @@ KanbanFu.TrelloAction = Ember.Object.extend
   ).property('type')
 
   isUpdateType: (() ->
-    console.log @get('type')
     @get('type') == 'updateCard'
   ).property('type')
 

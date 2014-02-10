@@ -11,7 +11,7 @@
       <strong>{{trelloAction.memberCreator.fullName}}</strong>
     </td>
     <td>
-      <span class="label label-info">{{trelloAction.typeName}}</span>
+      <span {{bind-attr class=":label trelloAction.isCreateType:label-danger:label-info"}}>{{trelloAction.typeName}}</span>
       {{trelloAction.data.card.name}}
 
       {{#if trelloAction.isUpdateType}}
@@ -19,6 +19,10 @@
         <strong>{{trelloAction.data.listBefore.name}}</strong>
         <span class="label label-info">to</span>
         <strong>{{trelloAction.data.listAfter.name}}</strong>
+      {{/if}}
+      {{#if trelloAction.isCreateType}}
+        <span class="label label-info">on</span>
+        <strong>{{trelloAction.data.list.name}}</strong>
       {{/if}}
     </td>
     <td>

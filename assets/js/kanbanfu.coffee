@@ -1,6 +1,6 @@
 #= require jquery
 #= require bootstrap
-#= require handlebars-1.1.2
+#= require handlebars.runtime
 #= require ember-1.3.2
 #= require ember-data
 #= require templates

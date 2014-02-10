@@ -47,7 +47,7 @@ function program5(depth0,data) {
 });Ember.TEMPLATES['board'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -61,7 +61,11 @@ function program3(depth0,data) {
   data.buffer.push("\n  <tr>\n    <td nowrap=\"nowrap\">\n      <strong>");
   stack1 = helpers._triageMustache.call(depth0, "trelloAction.memberCreator.fullName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</strong>\n    </td>\n    <td>\n      <span class=\"label label-info\">");
+  data.buffer.push("</strong>\n    </td>\n    <td>\n      <span ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'class': (":label trelloAction.isCreateType:label-danger:label-info")
+  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push(">");
   stack1 = helpers._triageMustache.call(depth0, "trelloAction.typeName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</span>\n      ");
@@ -69,6 +73,9 @@ function program3(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n\n      ");
   stack1 = helpers['if'].call(depth0, "trelloAction.isUpdateType", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      ");
+  stack1 = helpers['if'].call(depth0, "trelloAction.isCreateType", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </td>\n    <td>\n      ");
   data.buffer.push(escapeExpression((helper = helpers.timeAgo || (depth0 && depth0.timeAgo),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "trelloAction.date", options) : helperMissing.call(depth0, "timeAgo", "trelloAction.date", options))));
@@ -83,6 +90,16 @@ function program4(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</strong>\n        <span class=\"label label-info\">to</span>\n        <strong>");
   stack1 = helpers._triageMustache.call(depth0, "trelloAction.data.listAfter.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</strong>\n      ");
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n        <span class=\"label label-info\">on</span>\n        <strong>");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.data.list.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</strong>\n      ");
   return buffer;

@@ -19,5 +19,6 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
         trelloAction.set 'data', action.data
         trelloAction.set 'date', action.date
         trelloActions.push(trelloAction)
+        # console.log trelloAction
 
       controller.set("trelloActions", trelloActions)
