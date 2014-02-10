@@ -36,3 +36,6 @@ KanbanFu.AuthorizedRoute = Ember.Route.extend
 
 Ember.Handlebars.helper 'timeAgo', (value, options) ->
   return moment(value).fromNow()
+
+$ ->
+  $("#loadingJS").hide()
