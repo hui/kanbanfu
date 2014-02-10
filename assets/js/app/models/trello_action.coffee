@@ -4,10 +4,6 @@ KanbanFu.TrelloAction = Ember.Object.extend
   date: null
   data: null
 
-  dateFromNow: (() ->
-    moment(@get("date")).fromNow()
-  ).property('date')
-
   typeName: (() ->
     switch @get('type')
       when 'createCard'

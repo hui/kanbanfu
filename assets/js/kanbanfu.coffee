@@ -33,3 +33,6 @@ KanbanFu.AuthorizedRoute = Ember.Route.extend
         , error: () =>
           @transitionTo "/"
           resolve(false)
+
+Ember.Handlebars.helper 'timeAgo', (value, options) ->
+  return moment(value).fromNow()

@@ -47,7 +47,7 @@ function program5(depth0,data) {
 });Ember.TEMPLATES['board'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 function program1(depth0,data) {
   
@@ -57,7 +57,7 @@ function program1(depth0,data) {
 
 function program3(depth0,data) {
   
-  var buffer = '', stack1;
+  var buffer = '', stack1, helper, options;
   data.buffer.push("\n  <tr>\n    <td nowrap=\"nowrap\">\n      <strong>");
   stack1 = helpers._triageMustache.call(depth0, "trelloAction.memberCreator.fullName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
@@ -71,8 +71,7 @@ function program3(depth0,data) {
   stack1 = helpers['if'].call(depth0, "trelloAction.isUpdateType", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    </td>\n    <td>\n      ");
-  stack1 = helpers._triageMustache.call(depth0, "trelloAction.dateFromNow", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(escapeExpression((helper = helpers.timeAgo || (depth0 && depth0.timeAgo),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "trelloAction.date", options) : helperMissing.call(depth0, "timeAgo", "trelloAction.date", options))));
   data.buffer.push("\n    </td>\n  </tr>\n  ");
   return buffer;
   }
