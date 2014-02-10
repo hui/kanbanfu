@@ -3,10 +3,28 @@
   <li class="active">{{model.name}}</li>
 </ol>
 
-<div class="row">
-  {{#each card in cards}}
-    <div class="col-sm-3">
-      {{card.name}}
-    </div>
+<div class="">
+  <table class="table">
+  {{#each trelloAction in trelloActions}}
+  <tr>
+    <td nowrap="nowrap">
+      <strong>{{trelloAction.memberCreator.fullName}}</strong>
+    </td>
+    <td>
+      <span class="label label-info">{{trelloAction.typeName}}</span>
+      {{trelloAction.data.card.name}}
+
+      {{#if trelloAction.isUpdateType}}
+        <span class="label label-info">from</span>
+        <strong>{{trelloAction.data.listBefore.name}}</strong>
+        <span class="label label-info">to</span>
+        <strong>{{trelloAction.data.listAfter.name}}</strong>
+      {{/if}}
+    </td>
+    <td>
+      {{trelloAction.dateFromNow}}
+    </td>
+  </tr>
   {{/each}}
+  </table>
 </div>

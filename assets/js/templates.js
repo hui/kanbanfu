@@ -58,10 +58,34 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n    <div class=\"col-sm-3\">\n      ");
-  stack1 = helpers._triageMustache.call(depth0, "card.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\n  <tr>\n    <td nowrap=\"nowrap\">\n      <strong>");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.memberCreator.fullName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </div>\n  ");
+  data.buffer.push("</strong>\n    </td>\n    <td>\n      <span class=\"label label-info\">");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.typeName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n      ");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.data.card.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n\n      ");
+  stack1 = helpers['if'].call(depth0, "trelloAction.isUpdateType", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    </td>\n    <td>\n      ");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.dateFromNow", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    </td>\n  </tr>\n  ");
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n        <span class=\"label label-info\">from</span>\n        <strong>");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.data.listBefore.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</strong>\n        <span class=\"label label-info\">to</span>\n        <strong>");
+  stack1 = helpers._triageMustache.call(depth0, "trelloAction.data.listAfter.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</strong>\n      ");
   return buffer;
   }
 
@@ -71,10 +95,10 @@ function program3(depth0,data) {
   data.buffer.push("</li>\n  <li class=\"active\">");
   stack1 = helpers._triageMustache.call(depth0, "model.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\n</ol>\n\n<div class=\"row\">\n  ");
-  stack1 = helpers.each.call(depth0, "card", "in", "cards", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  data.buffer.push("</li>\n</ol>\n\n<div class=\"\">\n  <table class=\"table\">\n  ");
+  stack1 = helpers.each.call(depth0, "trelloAction", "in", "trelloActions", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n</div>");
+  data.buffer.push("\n  </table>\n</div>");
   return buffer;
   
 });Ember.TEMPLATES['boards'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
