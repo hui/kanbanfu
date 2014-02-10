@@ -1,0 +1,12 @@
+<ol class="breadcrumb">
+  <li>{{#link-to 'boards'}}Boards{{/link-to}}</li>
+  <li class="active">{{model.name}}</li>
+</ol>
+
+<div class="row">
+  {{#each card in cards}}
+    <div class="col-sm-3">
+      {{card.name}}
+    </div>
+  {{/each}}
+</div>

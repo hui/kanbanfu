@@ -1,23 +1,21 @@
-<div class="container">
-  <div role="navigation" class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-        {{#link-to 'index' class="navbar-brand"}}KanbanFu.com{{/link-to}}
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          {{#unless currentMember.authorized}}
-          <li><a {{action "login"}} href="#">Connect To Trello</a></li>
-          {{else}}
-          <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle">{{currentMember.fullName}}<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a {{action "logout"}} href="#">Log Out</a></li>
-            </ul>
-          </li>
-          {{/unless}}
-        </ul>
-      </div>
+<div role="navigation" class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      {{#link-to 'index' class="navbar-brand"}}KanbanFu.com{{/link-to}}
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        {{#unless currentMember.authorized}}
+        <li><a {{action "login"}} href="#">Connect To Trello</a></li>
+        {{else}}
+        <li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle">{{currentMember.fullName}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a {{action "logout"}} href="#">Log Out</a></li>
+          </ul>
+        </li>
+        {{/unless}}
+      </ul>
     </div>
   </div>
 </div>
