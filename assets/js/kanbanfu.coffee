@@ -4,6 +4,7 @@
 #= require ember-1.3.2
 #= require ember-data
 #= require templates
+#= require d3/d3.v3
 #= require_self
 #= require_tree .
 

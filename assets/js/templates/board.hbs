@@ -3,37 +3,21 @@
   <li class="active">{{model.name}}</li>
 </ol>
 
+<h3>Cumulative Flow</h3>
+
 {{stacked-area-chart data=listCardsByDayData}}
 
-<div class="">
-  <table class="table table-condensed">
-  {{#each trelloAction in trelloActions}}
+<h3>People Activities</h3>
+
+<table class="table table-condensed">
+{{#each actionList in actionsByMember}}
   <tr>
-    <td nowrap="nowrap">
-      <strong>{{trelloAction.memberCreator.fullName}}</strong>
+    <td>
+      <strong>{{actionList.name}}</strong>
     </td>
     <td>
-      <span {{bind-attr class=":label trelloAction.isCreateType:label-danger:label-info"}}>{{trelloAction.typeName}}</span>
-    </td>
-    <td>
-      <a {{bind-attr href=trelloAction.cardLink}} target="_blank">{{trelloAction.data.card.name}}</a>
-    </td>
-    <td nowrap="nowrap">
-      {{#if trelloAction.isUpdateType}}
-        <span class="label label-info">from</span>
-        <strong>{{trelloAction.data.listBefore.name}}</strong>
-        <span class="label label-info">to</span>
-        <strong>{{trelloAction.data.listAfter.name}}</strong>
-      {{/if}}
-      {{#if trelloAction.isCreateType}}
-        <span class="label label-info">on</span>
-        <strong>{{trelloAction.data.list.name}}</strong>
-      {{/if}}
-    </td>
-    <td nowrap="nowrap">
-      {{calendarTime trelloAction.date}}
+      <div style="height:80px;">{{cal-heatmap data=actionList.values}}</div>
     </td>
   </tr>
-  {{/each}}
-  </table>
-</div>
+{{/each}}
+</table>

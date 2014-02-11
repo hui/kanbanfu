@@ -20,7 +20,7 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
         # console.log list
       controller.set("trelloLists", trelloLists)
 
-    Trello.get "boards/#{model.id}/actions", filter: ['createCard', 'updateCard:idList', 'deleteCard'], limit: 1000, since: moment().subtract('days', 7).format(), (actions) =>
+    Trello.get "boards/#{model.id}/actions", filter: ['createCard', 'updateCard', 'deleteCard', 'commentCard', 'updateCheckItemStateOnCard'], limit: 1000, since: moment().subtract('days', 7).format(), (actions) =>
       trelloActions = []
       for action in actions
         trelloAction = KanbanFu.TrelloAction.create()

@@ -18,7 +18,7 @@ KanbanFu.StackedAreaChartComponent = Ember.Component.extend
 
       chart.xAxis.tickFormat (d)->
         d3.time.format('%m-%d')(new Date(d))
-      chart.yAxis.tickFormat(d3.format(',.0f'))
+      chart.yAxis.tickFormat(d3.format('d'))
 
       d3.select("##{@get("element").id} .chart svg").datum(@get("data")).transition().duration(500).call(chart)
       nv.utils.windowResize(chart.update)

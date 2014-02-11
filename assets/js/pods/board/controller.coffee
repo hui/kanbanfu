@@ -12,6 +12,18 @@ KanbanFu.BoardController = Ember.ObjectController.extend
     actionsByDay
   ).property("trelloActions")
 
+  actionsByMember: (() ->
+    actions = {}
+    for action in @get("trelloActions")
+      actions[action.memberCreator.id] ||= {}
+      actions[action.memberCreator.id]['name'] ||= action.memberCreator.fullName
+      actions[action.memberCreator.id]['values'] ||= {}
+      actions[action.memberCreator.id]['values'][moment(action.date).unix()] = 1
+
+    $.map actions, (a) ->
+      a
+  ).property("trelloActions")
+
   listCardsByDayData: (() ->
     unless @get("trelloLists").length > 0 && @get("trelloActions").length > 0
       return null
@@ -42,8 +54,9 @@ KanbanFu.BoardController = Ember.ObjectController.extend
             when 'createCard'
               listCardsByDay[day]['info'][action.data.list.id] -= 1
             when 'updateCard'
-              listCardsByDay[day]['info'][action.data.listAfter.id]  -= 1
-              listCardsByDay[day]['info'][action.data.listBefore.id] += 1
+              if action.data.listAfter?
+                listCardsByDay[day]['info'][action.data.listAfter.id]  -= 1
+                listCardsByDay[day]['info'][action.data.listBefore.id] += 1
             when 'deleteCard'
               listCardsByDay[day]['info'][action.data.list.id] += 1
 
@@ -52,8 +65,9 @@ KanbanFu.BoardController = Ember.ObjectController.extend
       listData['key'] = list.name
       listData['values'] = []
       for info in listCardsByDay
-        listData['values'].push [moment(info['date']).local(), info['info'][list.id]]
+        listData['values'].push [moment(info['date']), info['info'][list.id]]
       listCardsByDayDataTemp.push listData
 
+    # console.log listCardsByDayDataTemp
     return listCardsByDayDataTemp
   ).property("trelloLists", "trelloActions")
