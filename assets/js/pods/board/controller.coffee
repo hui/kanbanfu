@@ -27,7 +27,7 @@ KanbanFu.BoardController = Ember.ObjectController.extend
     listCardsByDay[0]['date'] = firstDay
     listCardsByDay[0]['info'] = {}
     for list in @get("trelloLists")
-      listCardsByDay[0]['info'][list.name] = list.cards.length
+      listCardsByDay[0]['info'][list.id] = list.cards.length
 
     for day in [1..7]
       date = moment().subtract("days", day).format("L")
@@ -40,19 +40,19 @@ KanbanFu.BoardController = Ember.ObjectController.extend
         for action in actionsByDay[prevDate]
           switch action.type
             when 'createCard'
-              listCardsByDay[day]['info'][action.data.list.name] -= 1
+              listCardsByDay[day]['info'][action.data.list.id] -= 1
             when 'updateCard'
-              listCardsByDay[day]['info'][action.data.listAfter.name]  -= 1
-              listCardsByDay[day]['info'][action.data.listBefore.name] += 1
+              listCardsByDay[day]['info'][action.data.listAfter.id]  -= 1
+              listCardsByDay[day]['info'][action.data.listBefore.id] += 1
             when 'deleteCard'
-              listCardsByDay[day]['info'][action.data.list.name] += 1
+              listCardsByDay[day]['info'][action.data.list.id] += 1
 
     for list in @get("trelloLists")
       listData = {}
       listData['key'] = list.name
       listData['values'] = []
       for info in listCardsByDay
-        listData['values'].push [moment(info['date']).local(), info['info'][list.name]]
+        listData['values'].push [moment(info['date']).local(), info['info'][list.id]]
       listCardsByDayDataTemp.push listData
 
     return listCardsByDayDataTemp

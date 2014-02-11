@@ -14,7 +14,7 @@ KanbanFu.StackedAreaChartComponent = Ember.Component.extend
         return d[0]
       ).y((d)->
         return d[1]
-      ).clipEdge(true)
+      ).clipEdge(true).showControls(false)
 
       chart.xAxis.tickFormat (d)->
         d3.time.format('%m-%d')(new Date(d))

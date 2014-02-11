@@ -5,6 +5,9 @@
       {{#link-to 'index' class="navbar-brand"}}KanbanFu.com{{/link-to}}
     </div>
     <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+          <li><a href="https://trello.com/b/QkagLilM/kanbanfu-com" target="_blank">Feedback</a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         {{#unless currentMember.authorized}}
         <li><a {{action "login"}} href="#">Connect To Trello</a></li>
