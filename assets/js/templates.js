@@ -68,17 +68,21 @@ function program3(depth0,data) {
   data.buffer.push(">");
   stack1 = helpers._triageMustache.call(depth0, "trelloAction.typeName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</span>\n      ");
+  data.buffer.push("</span>\n    </td>\n    <td>\n      <a ");
+  data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
+    'href': ("trelloAction.cardLink")
+  },hashTypes:{'href': "ID"},hashContexts:{'href': depth0},contexts:[],types:[],data:data})));
+  data.buffer.push(" target=\"_blank\">");
   stack1 = helpers._triageMustache.call(depth0, "trelloAction.data.card.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n      ");
+  data.buffer.push("</a>\n    </td>\n    <td nowrap=\"nowrap\">\n      ");
   stack1 = helpers['if'].call(depth0, "trelloAction.isUpdateType", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n      ");
   stack1 = helpers['if'].call(depth0, "trelloAction.isCreateType", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </td>\n    <td>\n      ");
-  data.buffer.push(escapeExpression((helper = helpers.timeAgo || (depth0 && depth0.timeAgo),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "trelloAction.date", options) : helperMissing.call(depth0, "timeAgo", "trelloAction.date", options))));
+  data.buffer.push("\n    </td>\n    <td nowrap=\"nowrap\">\n      ");
+  data.buffer.push(escapeExpression((helper = helpers.calendarTime || (depth0 && depth0.calendarTime),options={hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data},helper ? helper.call(depth0, "trelloAction.date", options) : helperMissing.call(depth0, "calendarTime", "trelloAction.date", options))));
   data.buffer.push("\n    </td>\n  </tr>\n  ");
   return buffer;
   }
@@ -111,7 +115,11 @@ function program6(depth0,data) {
   data.buffer.push("</li>\n  <li class=\"active\">");
   stack1 = helpers._triageMustache.call(depth0, "model.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\n</ol>\n\n<div class=\"\">\n  <table class=\"table\">\n  ");
+  data.buffer.push("</li>\n</ol>\n\n");
+  data.buffer.push(escapeExpression((helper = helpers['stacked-area-chart'] || (depth0 && depth0['stacked-area-chart']),options={hash:{
+    'data': ("listCardsByDayData")
+  },hashTypes:{'data': "ID"},hashContexts:{'data': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "stacked-area-chart", options))));
+  data.buffer.push("\n\n<div class=\"\">\n  <table class=\"table table-condensed\">\n  ");
   stack1 = helpers.each.call(depth0, "trelloAction", "in", "trelloActions", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n  </table>\n</div>");
@@ -170,5 +178,13 @@ function program2(depth0,data) {
   stack1 = helpers['if'].call(depth0, "currentMember.authorized", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   else { data.buffer.push(''); }
+  
+});Ember.TEMPLATES['components/stacked-area-chart'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  
+
+
+  data.buffer.push("<div class='chart' style='width:100%'>\n  <svg style='height:400px' />\n</div>");
   
 });

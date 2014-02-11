@@ -4,6 +4,10 @@ KanbanFu.TrelloAction = Ember.Object.extend
   date: null
   data: null
 
+  cardLink: (() ->
+    "https://trello.com/c/#{@get("data").card.shortLink}"
+  ).property('data')
+
   typeName: (() ->
     switch @get('type')
       when 'createCard'

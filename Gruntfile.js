@@ -10,13 +10,13 @@ module.exports = function(grunt) {
             return newSource.replace('.hbs', '');
           }
         },
-        files: ['assets/js/templates/*.hbs'],
+        files: ['assets/js/templates/*.hbs', 'assets/js/templates/components/*.hbs'],
         dest: 'assets/js/templates.js'
       }
     },
 
     watch: {
-      files: ['assets/js/templates/*.hbs'],
+      files: ['assets/js/templates/*.hbs', 'assets/js/templates/components/*.hbs'],
       tasks: ['emberhandlebars:compile']
     }
   });

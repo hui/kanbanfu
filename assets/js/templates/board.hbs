@@ -3,8 +3,10 @@
   <li class="active">{{model.name}}</li>
 </ol>
 
+{{stacked-area-chart data=listCardsByDayData}}
+
 <div class="">
-  <table class="table">
+  <table class="table table-condensed">
   {{#each trelloAction in trelloActions}}
   <tr>
     <td nowrap="nowrap">
@@ -12,8 +14,11 @@
     </td>
     <td>
       <span {{bind-attr class=":label trelloAction.isCreateType:label-danger:label-info"}}>{{trelloAction.typeName}}</span>
-      {{trelloAction.data.card.name}}
-
+    </td>
+    <td>
+      <a {{bind-attr href=trelloAction.cardLink}} target="_blank">{{trelloAction.data.card.name}}</a>
+    </td>
+    <td nowrap="nowrap">
       {{#if trelloAction.isUpdateType}}
         <span class="label label-info">from</span>
         <strong>{{trelloAction.data.listBefore.name}}</strong>
@@ -25,8 +30,8 @@
         <strong>{{trelloAction.data.list.name}}</strong>
       {{/if}}
     </td>
-    <td>
-      {{timeAgo trelloAction.date}}
+    <td nowrap="nowrap">
+      {{calendarTime trelloAction.date}}
     </td>
   </tr>
   {{/each}}

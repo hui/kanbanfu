@@ -4,11 +4,21 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
 
   setupController: (controller, model) ->
     controller.set("cards", [])
+    controller.set("trelloLists", [])
     controller.set("trelloActions", [])
     controller.set("model", model)
 
-    # Trello.get "boards/#{model.id}/cards", (cards) =>
-    #   controller.set("cards", cards)
+    Trello.get "boards/#{model.id}/lists", filter: 'open', cards: 'open', card_fields: 'id,name', (lists) =>
+      trelloLists = []
+      for list in lists
+        trelloList = KanbanFu.TrelloList.create()
+        trelloList.set 'id', list.id
+        trelloList.set 'name', list.name
+        trelloList.set 'cards', list.cards
+        trelloList.set 'pos', list.cards
+        trelloLists.push(list)
+        # console.log list
+      controller.set("trelloLists", trelloLists)
 
     Trello.get "boards/#{model.id}/actions", filter: ['createCard', 'updateCard:idList', 'deleteCard'], limit: 1000, since: moment().subtract('days', 7).format(), (actions) =>
       trelloActions = []
@@ -17,8 +27,7 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
         trelloAction.set 'memberCreator', action.memberCreator
         trelloAction.set 'type', action.type
         trelloAction.set 'data', action.data
-        trelloAction.set 'date', action.date
+        trelloAction.set 'date', moment(action.date).local()
         trelloActions.push(trelloAction)
-        # console.log trelloAction
-
+        # console.log action
       controller.set("trelloActions", trelloActions)
