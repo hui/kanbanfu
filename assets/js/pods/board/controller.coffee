@@ -30,7 +30,7 @@ KanbanFu.BoardController = Ember.ObjectController.extend
 
     actionsByDay = @get("actionsByDay")
 
-    # build list for 7 days
+    # build list for 10 days
     listCardsByDay = []
     listCardsByDayDataTemp = []
     firstDay = moment().format("L") # today
@@ -41,7 +41,7 @@ KanbanFu.BoardController = Ember.ObjectController.extend
     for list in @get("trelloLists")
       listCardsByDay[0]['info'][list.id] = list.cards.length
 
-    for day in [1..7]
+    for day in [1..10]
       date = moment().subtract("days", day).format("L")
       listCardsByDay[day] = {}
       listCardsByDay[day]['date'] = date
