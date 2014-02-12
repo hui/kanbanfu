@@ -34,6 +34,7 @@ KanbanFu.AuthorizedRoute = Ember.Route.extend
             resolve(true)
           resolve(Trello.authorized())
         , error: () =>
+          Trello.deauthorize()
           @transitionTo "/"
           resolve(false)
 

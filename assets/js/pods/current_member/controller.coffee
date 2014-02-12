@@ -6,6 +6,9 @@ KanbanFu.CurrentMemberController = Ember.ObjectController.extend
     Trello.members.get "me", (member) =>
       @set "authorized", true
       @set "content", member
+    , (error) =>
+      Trello.deauthorize()
+      @logout()
 
   logout: ->
     @set 'authorized', false
