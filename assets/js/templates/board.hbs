@@ -34,7 +34,7 @@
       <ol>
         {{#each card in list.cards}}
           <li>
-            <a href="{{card.url}}" target="_blank">{{card.name}}</a>
+            <a {{bind-attr href=card.url}} target="_blank">{{card.name}}</a>
             {{#each member in card.members}}
               <span class="label label-info">{{member.fullName}}</span>
             {{/each}}
