@@ -39,7 +39,7 @@ KanbanFu.BoardController = Ember.ObjectController.extend
     listCardsByDayDataArray
   ).property("listCardsByDayHash")
 
-  buildListCardsByDayHash: (() ->
+  buildListCardsByDayHash: () ->
     unless @get("trelloLists").length > 0 && @get("trelloActions").length > 0
       return null
 
@@ -79,4 +79,3 @@ KanbanFu.BoardController = Ember.ObjectController.extend
               listCardsByDay[day]['info'][action.data.list.id] += 1
 
     @set("listCardsByDayHash", listCardsByDay)
-  ).observes("trelloLists", "trelloActions")

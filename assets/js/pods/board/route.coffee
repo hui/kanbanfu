@@ -46,3 +46,5 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
       trelloActions.push(trelloAction)
       # console.log action
     controller.set("trelloActions", trelloActions)
+
+    controller.buildListCardsByDayHash()

@@ -7,7 +7,9 @@ window.paceOptions = { ajax: true }
 window.KanbanFu = Ember.Application.create()
 KanbanFu.Router.map ()->
   @resource 'boards', path: '/boards'
-  @resource 'board', path: '/board/:board_id'
+  @resource 'board', path: '/board/:board_id', () ->
+    @route 'chart'
+    @route 'heat'
 
 KanbanFu.LoadingRoute = Ember.Route.extend
   activate: ->

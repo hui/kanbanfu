@@ -1,0 +1,14 @@
+<h3>People Activities</h3>
+
+<table class="table table-condensed">
+{{#each actionList in board.actionsByMember}}
+  <tr>
+    <td>
+      <strong>{{actionList.name}}</strong>
+    </td>
+    <td>
+      <div style="height:80px;">{{cal-heatmap data=actionList.values}}</div>
+    </td>
+  </tr>
+{{/each}}
+</table>

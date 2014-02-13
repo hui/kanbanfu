@@ -3,45 +3,10 @@
   <li class="active">{{model.name}}</li>
 </ol>
 
-<h3>Cumulative Flow</h3>
+<ul class="nav nav-pills">
+  {{#linkTo "board.index" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Summary</a>{{/linkTo}}
+  {{#linkTo "board.heat" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Heat Map</a>{{/linkTo}}
+  {{#linkTo "board.chart" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Chart</a>{{/linkTo}}
+</ul>
 
-{{stacked-area-chart data=listCardsByDayArray}}
-
-<h3>People Activities</h3>
-
-<table class="table table-condensed">
-{{#each actionList in actionsByMember}}
-  <tr>
-    <td>
-      <strong>{{actionList.name}}</strong>
-    </td>
-    <td>
-      <div style="height:80px;">{{cal-heatmap data=actionList.values}}</div>
-    </td>
-  </tr>
-{{/each}}
-</table>
-
-<h3>Board Summary</h3>
-
-<table class="table table-condensed">
-{{#each list in trelloLists}}
-  <tr>
-    <td>
-      <strong>{{list.name}}</strong>
-    </td>
-    <td>
-      <ol>
-        {{#each card in list.cards}}
-          <li>
-            <a {{bind-attr href=card.url}} target="_blank">{{card.name}}</a>
-            {{#each member in card.members}}
-              <span class="label label-info">{{member.fullName}}</span>
-            {{/each}}
-          </li>
-        {{/each}}
-      </ol>
-    </td>
-  </tr>
-{{/each}}
-</table>
+{{outlet}}
