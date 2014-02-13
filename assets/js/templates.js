@@ -84,7 +84,18 @@ function program7(depth0,data) {
   data.buffer.push(escapeExpression((helper = helpers.bindAttr || (depth0 && depth0.bindAttr),options={hash:{
     'href': ("view.href")
   },hashTypes:{'href': "STRING"},hashContexts:{'href': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bindAttr", options))));
-  data.buffer.push(" href=\"#\">Chart</a>");
+  data.buffer.push(" href=\"#\">Cumulative Flow</a>");
+  return buffer;
+  }
+
+function program9(depth0,data) {
+  
+  var buffer = '', helper, options;
+  data.buffer.push("<a ");
+  data.buffer.push(escapeExpression((helper = helpers.bindAttr || (depth0 && depth0.bindAttr),options={hash:{
+    'href': ("view.href")
+  },hashTypes:{'href': "STRING"},hashContexts:{'href': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "bindAttr", options))));
+  data.buffer.push(" href=\"#\">BurnDown Chart</a>");
   return buffer;
   }
 
@@ -94,7 +105,9 @@ function program7(depth0,data) {
   data.buffer.push("</li>\n  <li class=\"active\">");
   stack1 = helpers._triageMustache.call(depth0, "model.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</li>\n</ol>\n\n<ul class=\"nav nav-pills\">\n  ");
+  data.buffer.push("</li>\n</ol>\n");
+  data.buffer.push(escapeExpression(helpers.log.call(depth0, "model", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\n<ul class=\"nav nav-tabs\">\n  ");
   stack1 = (helper = helpers.linkTo || (depth0 && depth0.linkTo),options={hash:{
     'tagName': ("li")
   },hashTypes:{'tagName': "STRING"},hashContexts:{'tagName': depth0},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "board.index", options) : helperMissing.call(depth0, "linkTo", "board.index", options));
@@ -107,14 +120,59 @@ function program7(depth0,data) {
   data.buffer.push("\n  ");
   stack1 = (helper = helpers.linkTo || (depth0 && depth0.linkTo),options={hash:{
     'tagName': ("li")
-  },hashTypes:{'tagName': "STRING"},hashContexts:{'tagName': depth0},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "board.chart", options) : helperMissing.call(depth0, "linkTo", "board.chart", options));
+  },hashTypes:{'tagName': "STRING"},hashContexts:{'tagName': depth0},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "board.cumulative", options) : helperMissing.call(depth0, "linkTo", "board.cumulative", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n  ");
+  stack1 = (helper = helpers.linkTo || (depth0 && depth0.linkTo),options={hash:{
+    'tagName': ("li")
+  },hashTypes:{'tagName': "STRING"},hashContexts:{'tagName': depth0},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "board.burndown", options) : helperMissing.call(depth0, "linkTo", "board.burndown", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</ul>\n\n");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   return buffer;
   
-});Ember.TEMPLATES['board/chart'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+});Ember.TEMPLATES['board/burndown'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n      <div class=\"checkbox-inline\">\n        <label>");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("label.checked")
+  },hashTypes:{'checkedBinding': "STRING"},hashContexts:{'checkedBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
+  stack1 = helpers._triageMustache.call(depth0, "label.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</label>\n      </div>\n    ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n      <div class=\"checkbox-inline\">\n        <label>");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Checkbox", {hash:{
+    'checkedBinding': ("list.checked")
+  },hashTypes:{'checkedBinding': "STRING"},hashContexts:{'checkedBinding': depth0},contexts:[depth0],types:["ID"],data:data})));
+  stack1 = helpers._triageMustache.call(depth0, "list.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</label>\n      </div>\n    ");
+  return buffer;
+  }
+
+  data.buffer.push("<h3>Burndown Chart</h3>\n\n<form class=\"form-horizontal\" role=\"form\">\n  <div class=\"form-group\">\n    <label class=\"col-sm-1 control-label\">Labels</label>\n    <div class=\"col-sm-11\">\n    ");
+  stack1 = helpers.each.call(depth0, "label", "in", "board.labels", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    </div>\n    <label class=\"col-sm-1 control-label\">Finish on</label>\n    <div class=\"col-sm-11\">\n    ");
+  stack1 = helpers.each.call(depth0, "list", "in", "board.trelloLists", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n    </div>\n  </div>\n</form>");
+  return buffer;
+  
+});Ember.TEMPLATES['board/cumulative'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
@@ -159,7 +217,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n  <tr>\n    <td>\n      <strong>");
+  data.buffer.push("\n  <tr>\n    <td nowrap=\"nowrap\">\n      <strong>");
   stack1 = helpers._triageMustache.call(depth0, "list.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</strong>\n    </td>\n    <td>\n      <ol>\n        ");
@@ -187,10 +245,10 @@ function program2(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n              <span class=\"label label-info\">");
+  data.buffer.push("\n              <small>@");
   stack1 = helpers._triageMustache.call(depth0, "member.fullName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</span>\n            ");
+  data.buffer.push("</small>\n            ");
   return buffer;
   }
 

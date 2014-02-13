@@ -1,4 +1,5 @@
 KanbanFu.BoardController = Ember.ObjectController.extend
+  labels: []
   members: []
   cards: []
   trelloActions: []

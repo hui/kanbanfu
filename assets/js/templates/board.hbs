@@ -2,11 +2,12 @@
   <li>{{#link-to 'boards'}}Boards{{/link-to}}</li>
   <li class="active">{{model.name}}</li>
 </ol>
-
-<ul class="nav nav-pills">
+{{log model}}
+<ul class="nav nav-tabs">
   {{#linkTo "board.index" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Summary</a>{{/linkTo}}
   {{#linkTo "board.heat" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Heat Map</a>{{/linkTo}}
-  {{#linkTo "board.chart" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Chart</a>{{/linkTo}}
+  {{#linkTo "board.cumulative" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">Cumulative Flow</a>{{/linkTo}}
+  {{#linkTo "board.burndown" tagName="li"}}<a {{bindAttr href="view.href"}} href="#">BurnDown Chart</a>{{/linkTo}}
 </ul>
 
 {{outlet}}

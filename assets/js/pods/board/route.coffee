@@ -7,6 +7,10 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
     controller.set("model", model)
     controller.set("listCardsByDayHash", {})
 
+    labels = $.map model.labelNames, (v, k) ->
+      {label: k, name: v} if v != ''
+    controller.set("labels", labels)
+
     members = {}
     for member in model.members
       members[member.id] = member
@@ -30,7 +34,7 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
           card.members = $.map card.idMembers, (id) ->
             members[id]
           trelloLists[card.idList].cards.push(card)
-
+    console.log card
     controller.set("cards", cards)
     controller.set "trelloLists", $.map(trelloLists, (a) ->
       a

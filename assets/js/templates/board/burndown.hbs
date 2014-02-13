@@ -1,0 +1,22 @@
+<h3>Burndown Chart</h3>
+
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="col-sm-1 control-label">Labels</label>
+    <div class="col-sm-11">
+    {{#each label in board.labels}}
+      <div class="checkbox-inline">
+        <label>{{view Ember.Checkbox checkedBinding="label.checked"}}{{label.name}}</label>
+      </div>
+    {{/each}}
+    </div>
+    <label class="col-sm-1 control-label">Finish on</label>
+    <div class="col-sm-11">
+    {{#each list in board.trelloLists}}
+      <div class="checkbox-inline">
+        <label>{{view Ember.Checkbox checkedBinding="list.checked"}}{{list.name}}</label>
+      </div>
+    {{/each}}
+    </div>
+  </div>
+</form>

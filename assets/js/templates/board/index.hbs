@@ -3,7 +3,7 @@
 <table class="table table-condensed">
 {{#each list in board.trelloLists}}
   <tr>
-    <td>
+    <td nowrap="nowrap">
       <strong>{{list.name}}</strong>
     </td>
     <td>
@@ -12,7 +12,7 @@
           <li>
             <a {{bind-attr href=card.url}} target="_blank">{{card.name}}</a>
             {{#each member in card.members}}
-              <span class="label label-info">{{member.fullName}}</span>
+              <small>@{{member.fullName}}</small>
             {{/each}}
           </li>
         {{/each}}
