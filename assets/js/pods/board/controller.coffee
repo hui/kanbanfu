@@ -2,6 +2,15 @@ KanbanFu.BoardController = Ember.ObjectController.extend
   cards: []
   trelloActions: []
   trelloLists: []
+  listCardsByDayHash: {}
+
+  closeCardOnDay: (card, day, maxDay)->
+    Trello.get "cards/#{card.id}/list", (list) =>
+      listCardsByDay = @get("listCardsByDayHash")
+      for i in [day..maxDay]
+        listCardsByDay[i]['info'][list.id] += 1
+      @set("listCardsByDayHash", listCardsByDay)
+      @notifyPropertyChange("listCardsByDayHash")
 
   actionsByDay: (() ->
     actionsByDay = {}
@@ -9,6 +18,7 @@ KanbanFu.BoardController = Ember.ObjectController.extend
       dateKey = moment(action.date).format("L")
       actionsByDay[dateKey] ||= []
       actionsByDay[dateKey].push(action)
+      # console.log action
     actionsByDay
   ).property("trelloActions")
 
@@ -24,7 +34,19 @@ KanbanFu.BoardController = Ember.ObjectController.extend
       a
   ).property("trelloActions")
 
-  listCardsByDayData: (() ->
+  listCardsByDayArray: (() ->
+    listCardsByDayDataArray = []
+    for list in @get("trelloLists")
+      listData = {}
+      listData['key'] = list.name
+      listData['values'] = []
+      for info in @get("listCardsByDayHash")
+        listData['values'].push [moment(info['date']), info['info'][list.id]]
+      listCardsByDayDataArray.push listData
+    listCardsByDayDataArray
+  ).property("listCardsByDayHash")
+
+  buildListCardsByDayHash: (() ->
     unless @get("trelloLists").length > 0 && @get("trelloActions").length > 0
       return null
 
@@ -57,17 +79,10 @@ KanbanFu.BoardController = Ember.ObjectController.extend
               if action.data.listAfter?
                 listCardsByDay[day]['info'][action.data.listAfter.id]  -= 1
                 listCardsByDay[day]['info'][action.data.listBefore.id] += 1
+              if action.data.old.closed == false
+                @closeCardOnDay(action.data.card, day, 10)
             when 'deleteCard'
               listCardsByDay[day]['info'][action.data.list.id] += 1
 
-    for list in @get("trelloLists")
-      listData = {}
-      listData['key'] = list.name
-      listData['values'] = []
-      for info in listCardsByDay
-        listData['values'].push [moment(info['date']), info['info'][list.id]]
-      listCardsByDayDataTemp.push listData
-
-    # console.log listCardsByDayDataTemp
-    return listCardsByDayDataTemp
-  ).property("trelloLists", "trelloActions")
+    @set("listCardsByDayHash", listCardsByDay)
+  ).observes("trelloLists", "trelloActions")

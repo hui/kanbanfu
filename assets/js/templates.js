@@ -77,7 +77,7 @@ function program3(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</li>\n</ol>\n\n<h3>Cumulative Flow</h3>\n\n");
   data.buffer.push(escapeExpression((helper = helpers['stacked-area-chart'] || (depth0 && depth0['stacked-area-chart']),options={hash:{
-    'data': ("listCardsByDayData")
+    'data': ("listCardsByDayArray")
   },hashTypes:{'data': "ID"},hashContexts:{'data': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "stacked-area-chart", options))));
   data.buffer.push("\n\n<h3>People Activities</h3>\n\n<table class=\"table table-condensed\">\n");
   stack1 = helpers.each.call(depth0, "actionList", "in", "actionsByMember", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
