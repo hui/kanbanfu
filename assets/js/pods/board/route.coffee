@@ -1,36 +1,48 @@
 KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
   model: (params) ->
-    return Trello.boards.get params['board_id']
+    actionTypes = 'createCard,updateCard,deleteCard,commentCard,updateCheckItemStateOnCard'
+    return Trello.boards.get params['board_id'], actions: actionTypes, actions_since: moment().subtract('days', 10).format(), actions_limit: 1000, lists: 'open', cards: 'all', card_fields: 'closed,idMembers,idList,labels,name,url', members: 'all'
 
   setupController: (controller, model) ->
-    controller.set("cards", [])
-    controller.set("trelloLists", [])
-    controller.set("trelloActions", [])
-    controller.set("listCardsByDayHash", {})
     controller.set("model", model)
+    controller.set("listCardsByDayHash", {})
 
-    Trello.get "boards/#{model.id}/lists", filter: 'open', cards: 'open', card_fields: 'id,name', (lists) =>
-      trelloLists = []
-      for list in lists
-        trelloList = KanbanFu.TrelloList.create()
-        trelloList.set 'id', list.id
-        trelloList.set 'name', list.name
-        trelloList.set 'cards', list.cards
-        trelloList.set 'pos', list.cards
-        trelloLists.push(list)
-        # console.log list
+    members = {}
+    for member in model.members
+      members[member.id] = member
+    controller.set("members", members)
 
-      controller.set("trelloLists", trelloLists)
+    trelloLists = {}
+    for list in model.lists
+      trelloList = KanbanFu.TrelloList.create()
+      trelloList.set 'id', list.id
+      trelloList.set 'name', list.name
+      trelloList.set 'cards', []
+      trelloList.set 'pos', list.pos
+      trelloLists[list.id] = trelloList
+      # console.log list
 
-    Trello.get "boards/#{model.id}/actions", filter: ['createCard', 'updateCard', 'deleteCard', 'commentCard', 'updateCheckItemStateOnCard'], limit: 1000, since: moment().subtract('days', 10).format(), (actions) =>
-      trelloActions = []
-      for action in actions
-        trelloAction = KanbanFu.TrelloAction.create()
-        trelloAction.set 'memberCreator', action.memberCreator
-        trelloAction.set 'type', action.type
-        trelloAction.set 'data', action.data
-        trelloAction.set 'date', moment(action.date).local()
-        trelloActions.push(trelloAction)
-        # console.log action
+    cards = {}
+    for card in model.cards
+      cards[card.id] = card
+      unless card.closed
+        if trelloLists[card.idList]?
+          card.members = $.map card.idMembers, (id) ->
+            members[id]
+          trelloLists[card.idList].cards.push(card)
 
-      controller.set("trelloActions", trelloActions)
+    controller.set("cards", cards)
+    controller.set "trelloLists", $.map(trelloLists, (a) ->
+      a
+    )
+
+    trelloActions = []
+    for action in model.actions
+      trelloAction = KanbanFu.TrelloAction.create()
+      trelloAction.set 'memberCreator', action.memberCreator
+      trelloAction.set 'type', action.type
+      trelloAction.set 'data', action.data
+      trelloAction.set 'date', moment(action.date).local()
+      trelloActions.push(trelloAction)
+      # console.log action
+    controller.set("trelloActions", trelloActions)

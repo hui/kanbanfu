@@ -21,3 +21,27 @@
   </tr>
 {{/each}}
 </table>
+
+<h3>Board Summary</h3>
+
+<table class="table table-condensed">
+{{#each list in trelloLists}}
+  <tr>
+    <td>
+      <strong>{{list.name}}</strong>
+    </td>
+    <td>
+      <ol>
+        {{#each card in list.cards}}
+          <li>
+            <a href="{{card.url}}" target="_blank">{{card.name}}</a>
+            {{#each member in card.members}}
+              <span class="label label-info">{{member.fullName}}</span>
+            {{/each}}
+          </li>
+        {{/each}}
+      </ol>
+    </td>
+  </tr>
+{{/each}}
+</table>

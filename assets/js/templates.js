@@ -69,6 +69,43 @@ function program3(depth0,data) {
   return buffer;
   }
 
+function program5(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n  <tr>\n    <td>\n      <strong>");
+  stack1 = helpers._triageMustache.call(depth0, "list.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</strong>\n    </td>\n    <td>\n      <ol>\n        ");
+  stack1 = helpers.each.call(depth0, "card", "in", "list.cards", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(6, program6, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n      </ol>\n    </td>\n  </tr>\n");
+  return buffer;
+  }
+function program6(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n          <li>\n            <a href=\"");
+  stack1 = helpers._triageMustache.call(depth0, "card.url", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\" target=\"_blank\">");
+  stack1 = helpers._triageMustache.call(depth0, "card.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</a>\n            ");
+  stack1 = helpers.each.call(depth0, "member", "in", "card.members", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n          </li>\n        ");
+  return buffer;
+  }
+function program7(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n              <span class=\"label label-info\">");
+  stack1 = helpers._triageMustache.call(depth0, "member.fullName", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n            ");
+  return buffer;
+  }
+
   data.buffer.push("<ol class=\"breadcrumb\">\n  <li>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "boards", options) : helperMissing.call(depth0, "link-to", "boards", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
@@ -81,6 +118,9 @@ function program3(depth0,data) {
   },hashTypes:{'data': "ID"},hashContexts:{'data': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "stacked-area-chart", options))));
   data.buffer.push("\n\n<h3>People Activities</h3>\n\n<table class=\"table table-condensed\">\n");
   stack1 = helpers.each.call(depth0, "actionList", "in", "actionsByMember", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n</table>\n\n<h3>Board Summary</h3>\n\n<table class=\"table table-condensed\">\n");
+  stack1 = helpers.each.call(depth0, "list", "in", "trelloLists", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n</table>");
   return buffer;
@@ -96,7 +136,7 @@ function program1(depth0,data) {
   data.buffer.push("\n");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{
     'class': ("btn btn-default")
-  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "board", "board", options) : helperMissing.call(depth0, "link-to", "board", "board", options));
+  },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["STRING","ID"],data:data},helper ? helper.call(depth0, "board", "board.id", options) : helperMissing.call(depth0, "link-to", "board", "board.id", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n");
   return buffer;

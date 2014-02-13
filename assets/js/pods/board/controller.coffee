@@ -1,16 +1,9 @@
 KanbanFu.BoardController = Ember.ObjectController.extend
+  members: []
   cards: []
   trelloActions: []
   trelloLists: []
   listCardsByDayHash: {}
-
-  closeCardOnDay: (card, day, maxDay)->
-    Trello.get "cards/#{card.id}/list", (list) =>
-      listCardsByDay = @get("listCardsByDayHash")
-      for i in [day..maxDay]
-        listCardsByDay[i]['info'][list.id] += 1
-      @set("listCardsByDayHash", listCardsByDay)
-      @notifyPropertyChange("listCardsByDayHash")
 
   actionsByDay: (() ->
     actionsByDay = {}
@@ -80,7 +73,8 @@ KanbanFu.BoardController = Ember.ObjectController.extend
                 listCardsByDay[day]['info'][action.data.listAfter.id]  -= 1
                 listCardsByDay[day]['info'][action.data.listBefore.id] += 1
               if action.data.old.closed == false
-                @closeCardOnDay(action.data.card, day, 10)
+                idList = @get("cards")[action.data.card.id].idList
+                listCardsByDay[day]['info'][idList] += 1
             when 'deleteCard'
               listCardsByDay[day]['info'][action.data.list.id] += 1
 
