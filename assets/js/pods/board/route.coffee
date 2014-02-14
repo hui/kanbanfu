@@ -34,7 +34,7 @@ KanbanFu.BoardRoute = KanbanFu.AuthorizedRoute.extend
           card.members = $.map card.idMembers, (id) ->
             members[id]
           trelloLists[card.idList].cards.push(card)
-    console.log card
+
     controller.set("cards", cards)
     controller.set "trelloLists", $.map(trelloLists, (a) ->
       a

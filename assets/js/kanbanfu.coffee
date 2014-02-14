@@ -8,7 +8,7 @@ window.KanbanFu = Ember.Application.create()
 KanbanFu.Router.map ()->
   @resource 'boards', path: '/boards'
   @resource 'board', path: '/board/:board_id', () ->
-    @route 'burndown'
+    @route 'burnup'
     @route 'cumulative'
     @route 'heat'
 
