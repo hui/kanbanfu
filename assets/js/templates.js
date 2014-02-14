@@ -35,7 +35,7 @@ function program5(depth0,data) {
     'class': ("navbar-brand")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </div>\n    <div class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n          <li><a href=\"https://trello.com/b/QkagLilM/kanbanfu-com\" target=\"_blank\">Feedback</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        ");
+  data.buffer.push("\n    </div>\n    <div class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n          <li><a href=\"http://kanbanfu.tumblr.com/\" target=\"_blank\">Blog</a></li>\n          <li><a href=\"https://trello.com/b/QkagLilM/kanbanfu-com\" target=\"_blank\">Feedback</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        ");
   stack1 = helpers.unless.call(depth0, "currentMember.authorized", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n      </ul>\n    </div>\n  </div>\n</div>\n<div class=\"container\">\n  ");
