@@ -10,6 +10,9 @@
       <ol>
         {{#each card in list.cards}}
           <li>
+            {{#each label in card.labels}}
+              <span class="label label-info">{{label.name}}</span>
+            {{/each}}
             <a {{bind-attr href=card.url}} target="_blank">{{card.name}}</a>
             {{#each member in card.members}}
               <small>@{{member.fullName}}</small>

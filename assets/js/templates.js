@@ -35,7 +35,7 @@ function program5(depth0,data) {
     'class': ("navbar-brand")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "index", options) : helperMissing.call(depth0, "link-to", "index", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </div>\n    <div class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n          <li><a href=\"http://kanbanfu.tumblr.com/\" target=\"_blank\">Blog</a></li>\n          <li><a href=\"https://trello.com/b/QkagLilM/kanbanfu-com\" target=\"_blank\">Feedback</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        ");
+  data.buffer.push("\n    </div>\n    <div class=\"navbar-collapse collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li><a href=\"http://kanbanfu.tumblr.com/\" target=\"_blank\">Blog</a></li>\n        <li><a href=\"https://trello.com/b/QkagLilM/kanbanfu-com\" target=\"_blank\">Feedback</a></li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        ");
   stack1 = helpers.unless.call(depth0, "currentMember.authorized", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n      </ul>\n    </div>\n  </div>\n</div>\n<div class=\"container\">\n  ");
@@ -213,7 +213,7 @@ function program1(depth0,data) {
 });Ember.TEMPLATES['board/index'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, self=this, escapeExpression=this.escapeExpression;
 
 function program1(depth0,data) {
   
@@ -230,7 +230,10 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n          <li>\n            <a ");
+  data.buffer.push("\n          <li>\n            ");
+  stack1 = helpers.each.call(depth0, "label", "in", "card.labels", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            <a ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'href': ("card.url")
   },hashTypes:{'href': "ID"},hashContexts:{'href': depth0},contexts:[],types:[],data:data})));
@@ -238,12 +241,22 @@ function program2(depth0,data) {
   stack1 = helpers._triageMustache.call(depth0, "card.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</a>\n            ");
-  stack1 = helpers.each.call(depth0, "member", "in", "card.members", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  stack1 = helpers.each.call(depth0, "member", "in", "card.members", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n          </li>\n        ");
   return buffer;
   }
 function program3(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\n              <span class=\"label label-info\">");
+  stack1 = helpers._triageMustache.call(depth0, "label.name", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</span>\n            ");
+  return buffer;
+  }
+
+function program5(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\n              <small>@");
